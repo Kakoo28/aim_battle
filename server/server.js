@@ -54,6 +54,11 @@ wss.on("connection", ws => {
                         }
                     }
                     break;
+
+                case "InviteUserToServer":
+                    send(USERS[data], "sendInvitationToClient", {username: ws.username, invitationID: ws.id + '_' + data});
+                    send(ws, "confirmInvitationToClient", USERS[data].username);
+                    break;
             }
 
         } catch (error) {
