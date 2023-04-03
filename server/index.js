@@ -24,7 +24,31 @@ function send(ws, event, data = null) {
 wss.on("connection", ws => {
 
     ws.userID = uuid();
-    console.log(' + ' + ws.userID);
+    console.log(' [+] ' + ws.userID);
+    
+    ws.on("message", message => {
+        try 
+        {
+            const data = JSON.parse(message);
+
+            switch (data.event) {
+                case "username-update__server":
+                    if (data.data.length < 12 && data.data.length > 0) {
+                        ws.username = data.data;
+                        console.log(' [~] ' + ws.userID + " => " + data.data);
+                        send(ws, "username-accept__client", data.data);
+                    } else {
+                        console.log(' [x] ' + ws.userID + " x=x " + data.data);
+                        send(ws, "username-denied__client", data.data);
+                    }
+                    break;
+            }
+        } 
+        catch (err) 
+        {
+            console.log(err);
+        }
+    }); 
 
 });
 
