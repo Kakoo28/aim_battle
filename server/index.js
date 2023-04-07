@@ -2,7 +2,6 @@ const http = require('http');
 const WebSocket = require('ws');
 const express = require('express');
 
-
 const {v4: uuid} = require('uuid');
 
 const app = express();
@@ -17,6 +16,8 @@ app.get('/', (req, res) => {
 
 app.use('/static', express.static('../client/assets/'));
 
+const USERS = [];
+
 function send(ws, event, data = null) {
     ws.send(JSON.stringify({event, data}));
 }
@@ -27,7 +28,7 @@ wss.on("connection", ws => {
     console.log(' [+] ' + ws.userID);
     
     ws.on("message", message => {
-        try 
+        try
         {
             const data = JSON.parse(message);
 
@@ -48,8 +49,7 @@ wss.on("connection", ws => {
         {
             console.log(err);
         }
-    }); 
-
+    });
 });
 
 server.listen(PORT, () => {

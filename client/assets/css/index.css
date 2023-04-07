@@ -8,7 +8,7 @@ body {
     font-size: 1.2rem;
     text-align: center;
     background-color: rgb(50, 50, 50);
-    color: white;
+    color: #FFF;
 }
 
 #username-form {
@@ -17,7 +17,7 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
 
-    border: white solid 5px;
+    border: #FFF solid 5px;
     min-height: 25vh;
     width: 40vw;
 
@@ -34,26 +34,26 @@ body {
     border: none;
     text-align: center;
     background: none;
-    border-bottom: 2px solid white;
-    color: white;
+    border-bottom: 2px solid #FFF;
+    color: #FFF;
     font-weight: bold;
     margin-top: 20px;
 }
 
 #username-input {
-    outline: 1px solid white;
+    outline: 1px solid #FFF;
 }
 
 #submit-btn {
     position: relative;
     display: block;
 
-    border: 2px solid white;
+    border: 2px solid #FFF;
     padding: 5px 25px;
     background: none;
     font-weight: bold;
     font-size: 1.5rem;
-    color: white;
+    color: #FFF;
     transition: 0.3s;
     overflow: hidden;
     margin-bottom: 20px;
@@ -79,3 +79,90 @@ body {
     left: 0;
 }
 
+/* WAITING-ROOM */
+#waiting-container {
+    height: 600px;
+    width: 70%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 4px solid #FFF;
+
+    display: flex;
+    align-items: center;
+}
+
+#chat {
+    position: relative;
+    width: 70%;
+    height: 100%;
+}
+
+#message-container {
+    height: 90%;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+}
+#message-container::-webkit-scrollbar {
+    display: none;
+}
+
+#message-form {
+    width: 100%;
+    height: 10%;
+
+    position: relative;
+    background-color: rgb(50, 50, 50);
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 5px;
+    border-top: 2px solid #FFF;
+}
+
+#message-input {
+    width: 90%;
+    outline: none;
+    border: none;
+    font-size: 1.2rem;
+    background: none;
+    color: #FFF;
+}
+
+#message-send-btn {
+    height: 90%;
+    font-size: 1.08rem;
+    background: none;
+    color: #FFF;
+    border: 2px solid #FFF;
+    transition: .3s;
+}
+
+#message-send-btn:hover {
+    background-color: #FFF;
+    color: black;
+}
+
+#player-list {
+    width: 30%;
+    height: 100%;
+    border-left: 2px solid #FFF;
+}
+
+@media screen and (max-width: 900px) {
+    * {
+        display: none;
+    }
+}

@@ -7,7 +7,16 @@ const USERNAME_FORM_DOM = '<form id="username-form" autocomplete="off">' +
     '<button type="submit" id="submit-btn">START</button>' +
 '</form>';
 
-const WAITING_ROOM_DOM = '<div id="waiting-container"> Waiting Room </div>';
+const WAITING_ROOM_DOM = '<div id="waiting-container">' +
+    '<div id="chat">' +
+        '<div id="message-container"></div>' +
+        '<form id="message-form" autocomplete="off">' +
+            '<input type="text" placeholder="Entrez votre message.." id="message-input">' +
+            '<button type="submit" id="message-send-btn">Envoyer</button>' +
+        '</form>' +
+    '</div>' +
+    '<div id="player-list"></div>' +
+'</div>';
 
 function bringToWaitingRoom() {
     ROOT.innerHTML = WAITING_ROOM_DOM;
@@ -23,17 +32,24 @@ ws.addEventListener('open', () => {
     document.getElementById('username-form').addEventListener('submit', e => {
         e.preventDefault();
         const username_input = document.getElementById('username-input');
-
-        send("username-update__server", username_input.value);
-        username_input.value = null;
+        if (username_input.value.length > 0) {
+            send("username-update__server", username_input.value);
+            username_input.value = null;    
+        }
     });
 });
 
 ws.addEventListener('message', message => {
     const data = JSON.parse(message.data);
+
     switch (data.event) {
         case "username-accept__client":
             bringToWaitingRoom();
             break;
+        case "username-denied__client":
+            const username_input = document.getElementById('username-input');
+            username_input.style.backgroundColor = "rgb(200, 50, 50)";
+            break;
+
     }
 });
